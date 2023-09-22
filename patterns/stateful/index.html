@@ -784,13 +784,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validate-velero-install" class="md-nav__link">
-    Validate Velero Install
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#destroy" class="md-nav__link">
     Destroy
   </a>
@@ -1156,13 +1149,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validate-velero-install" class="md-nav__link">
-    Validate Velero Install
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#destroy" class="md-nav__link">
     Destroy
   </a>
@@ -1221,7 +1207,6 @@
 <h2 id="deploy">Deploy<a class="headerlink" href="#deploy" title="Permanent link">&para;</a></h2>
 <p>See <a href="https://aws-ia.github.io/terraform-aws-eks-blueprints/getting-started/#prerequisites">here</a> for the prerequisites and steps to deploy this pattern.</p>
 <h2 id="validate">Validate<a class="headerlink" href="#validate" title="Permanent link">&para;</a></h2>
-<p>For validating <code>velero</code> see <a href="https://aws-ia.github.io/terraform-aws-eks-blueprints/tree/main/patterns/stateful/README.md#Validate-Velero-Install">here</a></p>
 <p>The following command will update the <code>kubeconfig</code> on your local machine and allow you to interact with your EKS Cluster using <code>kubectl</code> to validate the Velero deployment.</p>
 <ol>
 <li>
@@ -1296,48 +1281,39 @@
 </span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>/dev/nvme1n1    24594768 2886716  20433380  13% /run/containerd
 </span></code></pre></div>
 </li>
-</ol>
-<h2 id="validate-velero-install">Validate Velero Install<a class="headerlink" href="#validate-velero-install" title="Permanent link">&para;</a></h2>
-<p>The following command will update the <code>kubeconfig</code> on your local machine and allow you to interact with your EKS Cluster using <code>kubectl</code> to validate the Velero deployment.</p>
-<ol>
-<li>
-<p>Run <code>update-kubeconfig</code> command:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>aws<span class="w"> </span>eks<span class="w"> </span>--region<span class="w"> </span>&lt;REGION&gt;<span class="w"> </span>update-kubeconfig<span class="w"> </span>--name<span class="w"> </span>&lt;CLUSTER_NAME&gt;
-</span></code></pre></div>
-</li>
 <li>
 <p>Test by listing velero resources provisioned:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>all<span class="w"> </span>-n<span class="w"> </span>velero
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="c1"># Output should look similar to below</span>
-</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>NAME<span class="w">                         </span>READY<span class="w">   </span>STATUS<span class="w">    </span>RESTARTS<span class="w">   </span>AGE
-</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>pod/velero-b4d8fd5c7-5smp6<span class="w">   </span><span class="m">1</span>/1<span class="w">     </span>Running<span class="w">   </span><span class="m">0</span><span class="w">          </span>112s
-</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
-</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>NAME<span class="w">             </span>TYPE<span class="w">        </span>CLUSTER-IP<span class="w">       </span>EXTERNAL-IP<span class="w">   </span>PORT<span class="o">(</span>S<span class="o">)</span><span class="w">    </span>AGE
-</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>service/velero<span class="w">   </span>ClusterIP<span class="w">   </span><span class="m">172</span>.20.217.203<span class="w">   </span>&lt;none&gt;<span class="w">        </span><span class="m">8085</span>/TCP<span class="w">   </span>114s
-</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>
-</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>NAME<span class="w">                     </span>READY<span class="w">   </span>UP-TO-DATE<span class="w">   </span>AVAILABLE<span class="w">   </span>AGE
-</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>deployment.apps/velero<span class="w">   </span><span class="m">1</span>/1<span class="w">     </span><span class="m">1</span><span class="w">            </span><span class="m">1</span><span class="w">           </span>114s
-</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>
-</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>NAME<span class="w">                               </span>DESIRED<span class="w">   </span>CURRENT<span class="w">   </span>READY<span class="w">   </span>AGE
-</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>replicaset.apps/velero-b4d8fd5c7<span class="w">   </span><span class="m">1</span><span class="w">         </span><span class="m">1</span><span class="w">         </span><span class="m">1</span><span class="w">       </span>114s
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>all<span class="w"> </span>-n<span class="w"> </span>velero
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1"># Output should look similar to below</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>NAME<span class="w">                         </span>READY<span class="w">   </span>STATUS<span class="w">    </span>RESTARTS<span class="w">   </span>AGE
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>pod/velero-b4d8fd5c7-5smp6<span class="w">   </span><span class="m">1</span>/1<span class="w">     </span>Running<span class="w">   </span><span class="m">0</span><span class="w">          </span>112s
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>NAME<span class="w">             </span>TYPE<span class="w">        </span>CLUSTER-IP<span class="w">       </span>EXTERNAL-IP<span class="w">   </span>PORT<span class="o">(</span>S<span class="o">)</span><span class="w">    </span>AGE
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>service/velero<span class="w">   </span>ClusterIP<span class="w">   </span><span class="m">172</span>.20.217.203<span class="w">   </span>&lt;none&gt;<span class="w">        </span><span class="m">8085</span>/TCP<span class="w">   </span>114s
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>NAME<span class="w">                     </span>READY<span class="w">   </span>UP-TO-DATE<span class="w">   </span>AVAILABLE<span class="w">   </span>AGE
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>deployment.apps/velero<span class="w">   </span><span class="m">1</span>/1<span class="w">     </span><span class="m">1</span><span class="w">            </span><span class="m">1</span><span class="w">           </span>114s
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>NAME<span class="w">                               </span>DESIRED<span class="w">   </span>CURRENT<span class="w">   </span>READY<span class="w">   </span>AGE
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>replicaset.apps/velero-b4d8fd5c7<span class="w">   </span><span class="m">1</span><span class="w">         </span><span class="m">1</span><span class="w">         </span><span class="m">1</span><span class="w">       </span>114s
 </span></code></pre></div>
 </li>
 <li>
 <p>Get backup location using velero <a href="https://velero.io/docs/v1.8/basic-install/#install-the-cli">CLI</a></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>velero<span class="w"> </span>backup-location<span class="w"> </span>get
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="c1"># Output should look similar to below</span>
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>NAME<span class="w">      </span>PROVIDER<span class="w">   </span>BUCKET/PREFIX<span class="w">             </span>PHASE<span class="w">       </span>LAST<span class="w"> </span>VALIDATED<span class="w">                  </span>ACCESS<span class="w"> </span>MODE<span class="w">   </span>DEFAULT
-</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>default<span class="w">   </span>aws<span class="w">        </span>velero-ssqwm44hvofzb32d<span class="w">   </span>Available<span class="w">   </span><span class="m">2022</span>-05-22<span class="w"> </span><span class="m">10</span>:53:26<span class="w"> </span>-0400<span class="w"> </span>EDT<span class="w">   </span>ReadWrite<span class="w">     </span><span class="nb">true</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>velero<span class="w"> </span>backup-location<span class="w"> </span>get
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="c1"># Output should look similar to below</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>NAME<span class="w">      </span>PROVIDER<span class="w">   </span>BUCKET/PREFIX<span class="w">             </span>PHASE<span class="w">       </span>LAST<span class="w"> </span>VALIDATED<span class="w">                  </span>ACCESS<span class="w"> </span>MODE<span class="w">   </span>DEFAULT
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>default<span class="w">   </span>aws<span class="w">        </span>velero-ssqwm44hvofzb32d<span class="w">   </span>Available<span class="w">   </span><span class="m">2022</span>-05-22<span class="w"> </span><span class="m">10</span>:53:26<span class="w"> </span>-0400<span class="w"> </span>EDT<span class="w">   </span>ReadWrite<span class="w">     </span><span class="nb">true</span>
 </span></code></pre></div>
 </li>
 </ol>
 <h2 id="destroy">Destroy<a class="headerlink" href="#destroy" title="Permanent link">&para;</a></h2>
 <!-- BEGIN INCLUDE ../../docs/_partials/destroy.md -->
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>terraform<span class="w"> </span>destroy<span class="w"> </span>-target<span class="o">=</span><span class="s2">&quot;module.eks_blueprints_addons&quot;</span><span class="w"> </span>-auto-approve
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>terraform<span class="w"> </span>destroy<span class="w"> </span>-target<span class="o">=</span><span class="s2">&quot;module.eks&quot;</span><span class="w"> </span>-auto-approve
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>terraform<span class="w"> </span>destroy<span class="w"> </span>-auto-approve
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>terraform<span class="w"> </span>destroy<span class="w"> </span>-target<span class="o">=</span><span class="s2">&quot;module.eks_blueprints_addons&quot;</span><span class="w"> </span>-auto-approve
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>terraform<span class="w"> </span>destroy<span class="w"> </span>-target<span class="o">=</span><span class="s2">&quot;module.eks&quot;</span><span class="w"> </span>-auto-approve
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>terraform<span class="w"> </span>destroy<span class="w"> </span>-auto-approve
 </span></code></pre></div>
 <p>See <a href="https://aws-ia.github.io/terraform-aws-eks-blueprints/getting-started/#destroy">here</a> for more details on cleaning up the resources created.</p>
 <!-- END INCLUDE -->
